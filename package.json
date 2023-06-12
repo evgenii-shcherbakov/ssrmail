@@ -1,0 +1,54 @@
+{
+  "name": "ssrmail",
+  "version": "1.0.0",
+  "description": "Typescript email SSR-framework",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/evgenii-shcherbakov/ssrmail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evgenii-shcherbakov/ssrmail/issues"
+  },
+  "homepage": "https://github.com/evgenii-shcherbakov/ssrmail#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "SSR",
+    "email",
+    "framework"
+  ],
+  "author": "Evgenii Scherbakov <iipekolict@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "copy:hbs": "find . -name '*.hbs' | cpio -pdm ./build",
+    "copy:css": "find . -name '*.css' | cpio -pdm ./build",
+    "copy": "npm run copy:hbs && npm run copy:css",
+    "example": "rm -rf dist && tsc -p tsconfig.example.json && npm run copy && node build/example/main.js",
+    "build": "rm -rf dist && tsc -p tsconfig.framework.json",
+    "format": "prettier --write \"{src,example}/**/*.ts\"",
+    "mount": "npm run build && npm link",
+    "pub": "npm run format && npm run build && npm version patch && npm publish"
+  },
+  "dependencies": {
+    "@evgenii-shcherbakov/coroutine": "^1.0.30",
+    "nodemailer": "^6.9.3",
+    "reflect-metadata": "^0.1.13"
+  },
+  "peerDependencies": {
+    "@evgenii-shcherbakov/coroutine": "^1.0.30",
+    "nodemailer": "^6.9.3",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.8",
+    "prettier": "2.6.2",
+    "typescript": "^4.7.3"
+  }
+}
